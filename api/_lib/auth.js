@@ -10,6 +10,17 @@ const crypto = require("crypto");
 const SESSION_MAX_AGE_SECONDS = 6 * 60 * 60; // sesi admin berlaku 6 jam
 const COOKIE_NAME = "rawsend_admin_session";
 
+// -----------------------------------------------------------------
+// 1. PASSWORD BISA DI-HARDCODE DI SINI
+//    Ganti 'admin123' dengan password yang Anda inginkan.
+//    Jika ingin tetap pakai environment variable, tinggal
+//    ubah menjadi: process.env.ADMIN_PASSWORD
+// -----------------------------------------------------------------
+const HARDCODED_PASSWORD = "admin123";   // <-- SET PASSWORD DI SINI
+
+// -----------------------------------------------------------------
+// 2. Fungsi untuk mendapatkan secret session (tetap dari env)
+// -----------------------------------------------------------------
 function getSessionSecret() {
   const secret = process.env.ADMIN_SESSION_SECRET;
   if (!secret) {
@@ -20,6 +31,9 @@ function getSessionSecret() {
   return secret;
 }
 
+// -----------------------------------------------------------------
+// 3. Fungsi-fungsi session (tidak diubah)
+// -----------------------------------------------------------------
 function sign(value) {
   return crypto.createHmac("sha256", getSessionSecret()).update(value).digest("hex");
 }
@@ -83,8 +97,18 @@ function clearSessionCookie(res) {
   );
 }
 
+// -----------------------------------------------------------------
+// 4. FUNGSI checkPassword — sekarang menggunakan HARDCODED_PASSWORD
+//    (tapi tetap kompatibel dengan env jika Anda ingin beralih)
+// -----------------------------------------------------------------
 function checkPassword(password) {
-  const real = process.env.ADMIN_PASSWORD;
+  // Ambil dari hardcode terlebih dahulu, tapi jika ingin
+  // memprioritaskan environment variable, bisa diubah logikanya.
+  const real = HARDCODED_PASSWORD;   // <-- password dari hardcode
+
+  // Fallback: jika hardcode kosong, coba ambil dari env (opsional)
+  // const real = HARDCODED_PASSWORD || process.env.ADMIN_PASSWORD;
+
   if (!real || typeof password !== "string" || password.length === 0) return false;
   const a = Buffer.from(password);
   const b = Buffer.from(real);
@@ -92,6 +116,9 @@ function checkPassword(password) {
   return crypto.timingSafeEqual(a, b);
 }
 
+// -----------------------------------------------------------------
+// 5. Ekspor semua fungsi yang dibutuhkan oleh route lain
+// -----------------------------------------------------------------
 module.exports = {
   isAuthenticated,
   setSessionCookie,
