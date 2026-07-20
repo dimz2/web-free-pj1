@@ -1,0 +1,11 @@
+{
+  "name": "rawsend-export-hub",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.6.1"
+  }
+}

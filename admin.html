@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Admin — RawSend Export Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body">
+
+<main class="admin-main">
+
+  <!-- Gerbang password -->
+  <section id="loginSection" class="panel login-panel">
+    <h1>Admin RawSend</h1>
+    <p class="panel-sub">Masukkan password untuk mengelola daftar file.</p>
+    <form id="loginForm">
+      <label for="passwordInput">Password</label>
+      <input type="password" id="passwordInput" name="password" autocomplete="current-password" required />
+      <button type="submit">Masuk</button>
+      <p id="loginError" class="error-text" hidden></p>
+    </form>
+  </section>
+
+  <!-- Panel admin (muncul setelah login) -->
+  <section id="adminSection" class="panel" hidden>
+    <div class="admin-header">
+      <h1>Kelola File</h1>
+      <button id="logoutBtn" class="ghost-btn" type="button">Keluar</button>
+    </div>
+
+    <form id="createForm" class="create-form">
+      <h2>Tambah File Baru</h2>
+
+      <label for="titleInput">Judul project</label>
+      <input type="text" id="titleInput" placeholder="Contoh: Thumbnail Project (bisa di custom)" required />
+
+      <label for="thumbnailInput">Link thumbnail (gambar preview)</label>
+      <input type="url" id="thumbnailInput" placeholder="https://..." />
+
+      <label for="downloadInput">Link download (file asli)</label>
+      <input type="url" id="downloadInput" placeholder="https://..." required />
+      <p class="field-hint">Link ini disembunyikan dari pengunjung — tidak akan muncul di kode halaman.</p>
+
+      <label for="fileNameInput">Nama file</label>
+      <input type="text" id="fileNameInput" placeholder="contoh-project-01.mp4" />
+
+      <label for="sizeInput">Ukuran file</label>
+      <input type="text" id="sizeInput" placeholder="84.2 MB" />
+
+      <div class="field-row">
+        <div>
+          <label for="resolutionInput">Resolusi</label>
+          <input type="text" id="resolutionInput" value="1080p" />
+        </div>
+        <div>
+          <label for="fpsInput">FPS</label>
+          <input type="text" id="fpsInput" value="60" />
+        </div>
+        <div>
+          <label for="codecInput">Codec</label>
+          <input type="text" id="codecInput" value="H.264" />
+        </div>
+      </div>
+
+      <button type="submit">+ Tambah ke Export Queue</button>
+      <p id="createError" class="error-text" hidden></p>
+      <p id="createSuccess" class="success-text" hidden>Berhasil ditambahkan.</p>
+    </form>
+
+    <div class="existing-items">
+      <h2>File Saat Ini (<span id="existingCount">0</span>)</h2>
+      <div id="existingList"></div>
+    </div>
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>

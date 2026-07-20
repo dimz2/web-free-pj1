@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RawSend Export Hub</title>
+<meta name="description" content="Antrian ekspor thumbnail & project video — siap diunduh kapan saja." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div class="brand-text">
+      <h1>RawSend Export Hub</h1>
+      <p class="subtitle">antrian ekspor &middot; siap diunduh</p>
+    </div>
+  </div>
+  <div class="profile" title="Profil kamu">RS</div>
+</header>
+
+<main>
+  <section class="queue-header">
+    <div>
+      <h2>Export Queue</h2>
+      <p class="queue-sub">Semua file di bawah sudah selesai di-render dan siap diambil.</p>
+    </div>
+    <span class="count" id="itemCount">0 file</span>
+  </section>
+
+  <div class="grid" id="grid"></div>
+
+  <p class="empty-hint" id="emptyHint" hidden>
+    Belum ada file. Tambahkan lewat <code>items.js</code>.
+  </p>
+</main>
+
+<footer>
+  <div class="reel" aria-hidden="true"></div>
+  <p>Mau nambah file baru? Edit array di <code>items.js</code> — tiap item otomatis jadi satu kartu di sini.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
